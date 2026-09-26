@@ -2,6 +2,7 @@ flask
 flask-sock
 gunicorn
 gevent
+packaging
 mss
 Pillow
 requests
