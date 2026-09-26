@@ -1,30 +1,13 @@
-import mss
-from PIL import Image
+import pyautogui
 import time
-import requests
 
-SERVER_URL = "http://127.0.0.1:5000/upload"
+print("Contrôle de test dans 3 secondes...")
+time.sleep(3)
 
-with mss.mss() as sct:
-    monitor = sct.monitors[1]
+x, y = pyautogui.position()
 
-    while True:
-        screenshot = sct.grab(monitor)
+print(f"Position actuelle : {x}, {y}")
 
-        image = Image.frombytes(
-            "RGB",
-            screenshot.size,
-            screenshot.rgb
-        )
+pyautogui.moveTo(x + 200, y, duration=1)
 
-        image.save("screen.png")
-
-        with open("screen.png", "rb") as file:
-            response = requests.post(
-                SERVER_URL,
-                files={"screen": file}
-            )
-
-        print("Capture envoyée !")
-
-        time.sleep(5)
+print("Souris déplacée !")

@@ -1,7 +1,9 @@
 from flask import Flask, request
+from flask_sock import Sock
 import os
 
 app = Flask(__name__)
+sock = Sock(app)
 
 
 @app.route("/")
@@ -20,6 +22,20 @@ def upload():
     print("Capture reçue !")
 
     return "OK"
+
+
+@sock.route("/ws")
+def websocket(ws):
+    print("Connexion WebSocket établie !")
+
+    while True:
+        message = ws.receive()
+
+        if message is None:
+            print("Connexion fermée.")
+            break
+
+        print("Message reçu :", message)
 
 
 port = int(os.environ.get("PORT", 5000))
