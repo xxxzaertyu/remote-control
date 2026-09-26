@@ -1,5 +1,6 @@
 flask
-requests
-mss
-pillow
 flask-sock
+mss
+Pillow
+requests
+websocket-client
